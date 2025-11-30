@@ -15,11 +15,7 @@ export default function Search() {
 
   return (
     <div className="max-w-xl mx-auto p-4 space-y-4">
-      {/* Form */}
-      <form
-        onSubmit={submit}
-        className="space-y-3 p-4 border rounded-lg shadow"
-      >
+      <form onSubmit={submit} className="space-y-3 p-4 border rounded-lg shadow">
         <input
           type="text"
           placeholder="Username"
@@ -52,7 +48,6 @@ export default function Search() {
         </button>
       </form>
 
-      {/* Results */}
       <div className="space-y-3">
         {results.map((u) => (
           <div
@@ -61,7 +56,9 @@ export default function Search() {
           >
             <div>
               <p className="font-semibold">{u.login}</p>
-              <p className="text-sm text-gray-600">Score: {u.score}</p>
+              <p className="text-sm text-gray-600">
+                Score: {u.score}
+              </p>
             </div>
 
             <a
