@@ -1,6 +1,6 @@
 // src/services/githubService.js
 
-export async function advancedSearchUsers({ username, location, minRepos }) {
+export async function fetchUserData({ username, location, minRepos }) {
   let query = "";
 
   if (username) query += `${username} in:login `;

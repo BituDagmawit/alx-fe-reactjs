@@ -1,18 +1,13 @@
-import './App.css';
-import { useState } from 'react';
-import SearchForm from './components/SearchForm';
-import UserCard from './components/UserCard';
+
 import Search from './components/Search';
 
-function App(){
-  const [user, setUser] = useState(null);
+export default function App() {
   return (
-    <div style={{maxWidth:600, margin:'20px auto', fontFamily:'Arial'}}>
-      <h1 className="text-2xl font-bold text-center mb-4">GitHub User Search</h1>
-      <SearchForm onResult={setUser} />
-      <UserCard user={user} />
+    <div className="p-4">
+      <h1 className="text-2xl font-bold text-center mb-4">
+        GitHub Advanced Search
+      </h1>
       <Search />
     </div>
   );
 }
-export default App;
