@@ -17,7 +17,7 @@ export default function SearchForm({ onResult }) {
   return (
     <form onSubmit={submit}>
       <input value={q} onChange={e=>setQ(e.target.value)} placeholder="github username" />
-      <button type="submit">Search</button>
+      <button type="submit" className='text-red-700'>Search</button>
     </form>
   );
 }

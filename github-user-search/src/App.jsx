@@ -8,7 +8,7 @@ function App(){
   const [user, setUser] = useState(null);
   return (
     <div style={{maxWidth:600, margin:'20px auto', fontFamily:'Arial'}}>
-      <h1>GitHub User Search</h1>
+      <h1 className="text-2xl font-bold text-center mb-4">GitHub User Search</h1>
       <SearchForm onResult={setUser} />
       <UserCard user={user} />
       <Search />
