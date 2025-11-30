@@ -1,16 +1,29 @@
-import axios from "axios";
+// githubService.js
 
-const BASE = "https://api.github.com";
+export const searchUsers = async ({ username, location, minRepos, page = 1 }) => {
+  // Build GitHub search query
+  let query = "";
 
-const client = axios.create({ baseURL: BASE });
+  if (username) query += `${username} in:login `;
+  if (location) query += `location:${location} `;
+  if (minRepos) query += `repos:>=${minRepos} `;
 
-/**
- * Must be exported with this exact name.
- * Calls GET https://api.github.com/users/{username}
- */
-export async function fetchUserData(username) {
-  if (!username) throw new Error("username required");
-  const url = `/users/${encodeURIComponent(username)}`;
-  const res = await client.get(url);
-  return res.data; // ensure caller gets the user object
-}
+  const url = `https://api.github.com/search/users?q=${encodeURIComponent(
+    query
+  )}&page=${page}&per_page=10`;
+
+  const response = await fetch(url);
+  const data = await response.json();
+
+  if (!data.items) return [];
+
+  // Search API does NOT return full details → we fetch each user's details
+  const detailedUsers = await Promise.all(
+    data.items.map(async (u) => {
+      const res = await fetch(u.url);
+      return await res.json();
+    })
+  );
+
+  return detailedUsers;
+};
