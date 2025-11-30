@@ -1,29 +1,18 @@
-// githubService.js
+// src/services/githubService.js
 
-export const searchUsers = async ({ username, location, minRepos, page = 1 }) => {
-  // Build GitHub search query
+export async function advancedSearchUsers({ username, location, minRepos }) {
   let query = "";
 
   if (username) query += `${username} in:login `;
   if (location) query += `location:${location} `;
-  if (minRepos) query += `repos:>=${minRepos} `;
+  if (minRepos) query += `repos:>=${minRepos}`;
 
   const url = `https://api.github.com/search/users?q=${encodeURIComponent(
-    query
-  )}&page=${page}&per_page=10`;
+    query.trim()
+  )}`;
 
   const response = await fetch(url);
   const data = await response.json();
 
-  if (!data.items) return [];
-
-  // Search API does NOT return full details → we fetch each user's details
-  const detailedUsers = await Promise.all(
-    data.items.map(async (u) => {
-      const res = await fetch(u.url);
-      return await res.json();
-    })
-  );
-
-  return detailedUsers;
-};
+  return data.items || [];
+}
