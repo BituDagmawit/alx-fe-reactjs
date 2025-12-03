@@ -14,7 +14,7 @@ export default function RecipeDetail() {
   if (!recipe) return <p className="p-6">Loading...</p>;
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
+    <div className="p-6 max-w-2xl mx-auto shadow">
       <img src={recipe.image} className="w-full rounded" />
       <h1 className="text-3xl font-bold mt-4">{recipe.title}</h1>
 
