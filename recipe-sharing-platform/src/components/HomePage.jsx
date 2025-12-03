@@ -1,32 +1,30 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-export default function HomePage() {
+function HomePage() {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    fetch("/src/data.json")
+    fetch("/data.json")
       .then(res => res.json())
       .then(data => setRecipes(data));
   }, []);
 
   return (
-    <div className="p-6 grid grid-cols-1 md:p-9 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {recipes.map(recipe => (
-        <div
+        <Link
           key={recipe.id}
-          className="bg-white shadow rounded-lg p-4 hover:shadow-xl hover:scale-105 transition"
+          to={`/recipe/${recipe.id}`}
+          className="block bg-white shadow p-4 rounded hover:shadow-lg transition"
         >
-          <img src={recipe.image} className="w-full rounded" />
-          <h2 className="text-xl font-semibold mt-2">{recipe.title}</h2>
-          <p className="text-gray-600 mt-1">{recipe.summary}</p>
-          <a
-            href={`/recipe/${recipe.id}`}
-            className="text-blue-500 mt-3 inline-block"
-          >
-            View Details →
-          </a>
-        </div>
+          <img src={recipe.image} className="w-full h-40 object-cover rounded" />
+          <h2 className="text-xl font-bold mt-2">{recipe.title}</h2>
+          <p className="text-gray-600">{recipe.summary}</p>
+        </Link>
       ))}
     </div>
   );
 }
+
+export default HomePage;
