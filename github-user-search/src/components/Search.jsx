@@ -31,7 +31,7 @@ export default function Search() {
         <input
           type="text"
           placeholder="Username"
-          className="w-full p-2 border rounded"
+          className="w-full border rounded"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
