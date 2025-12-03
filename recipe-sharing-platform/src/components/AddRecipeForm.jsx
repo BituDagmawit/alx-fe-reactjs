@@ -22,7 +22,7 @@ function AddRecipeForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 max-w-md mx-auto space-y-4">
+    <form onSubmit={handleSubmit} className="p-6 max-w-md mx-auto space-y-4 shadow font-medium">
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
