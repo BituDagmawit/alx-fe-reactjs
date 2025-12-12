@@ -1,27 +1,51 @@
 import { useState } from "react";
 
 export default function RegistrationForm() {
-  const [form, setForm] = useState({ username: "", email: "", password: "" });
-  const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail]       = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError]       = useState("");
 
-  const handleChange = e =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.username || !form.email || !form.password) {
-      setError("All fields required");
+
+    // Basic validation
+    if (!username || !email || !password) {
+      setError("All fields are required");
       return;
     }
-    console.log("Submitted:", form);
+
+    setError("");
+    console.log({ username, email, password });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input name="username" onChange={handleChange} value={form.username} />
-      <input name="email" onChange={handleChange} value={form.email} />
-      <input name="password" onChange={handleChange} value={form.password} />
-      <button>Register</button>
+
+      <input
+        name="username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+      />
+
+      <input
+        name="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Email"
+      />
+
+      <input
+        name="password"
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+
+      <button type="submit">Register</button>
+
       {error && <p>{error}</p>}
     </form>
   );
