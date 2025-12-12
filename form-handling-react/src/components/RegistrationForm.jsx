@@ -4,18 +4,21 @@ export default function RegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail]       = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError]       = useState("");
+  const [errors, setErrors]     = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Basic validation
-    if (!username || !email || !password) {
-      setError("All fields are required");
-      return;
-    }
+    const newErrors = {};
 
-    setError("");
+    if (!username) newErrors.username = "Username required";
+    if (!email)    newErrors.email    = "Email required";
+    if (!password) newErrors.password = "Password required";
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) return;
+
     console.log({ username, email, password });
   };
 
@@ -28,6 +31,7 @@ export default function RegistrationForm() {
         onChange={(e) => setUsername(e.target.value)}
         placeholder="Username"
       />
+      {errors.username && <p>{errors.username}</p>}
 
       <input
         name="email"
@@ -35,6 +39,7 @@ export default function RegistrationForm() {
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
       />
+      {errors.email && <p>{errors.email}</p>}
 
       <input
         name="password"
@@ -43,10 +48,9 @@ export default function RegistrationForm() {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
       />
+      {errors.password && <p>{errors.password}</p>}
 
       <button type="submit">Register</button>
-
-      {error && <p>{error}</p>}
     </form>
   );
 }
