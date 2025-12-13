@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-// REQUIRED fetch function
 const fetchPosts = async () => {
   const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
   return res.data;
@@ -12,11 +11,17 @@ export default function PostsComponent() {
     data,
     isLoading,
     isError,
-    error,     // ✅ REQUIRED
+    error,
     refetch
   } = useQuery({
     queryKey: ["posts"],
-    queryFn: fetchPosts
+    queryFn: fetchPosts,
+
+    // ✅ REQUIRED cache options
+    staleTime: 1000 * 60,
+    cacheTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+    keepPreviousData: true
   });
 
   if (isLoading) return <p>Loading...</p>;
@@ -24,7 +29,7 @@ export default function PostsComponent() {
 
   return (
     <>
-      {/* REQUIRED refetch interaction */}
+      {/* ✅ Data refetch interaction */}
       <button onClick={refetch}>Refetch Posts</button>
 
       {data.map((post) => (
