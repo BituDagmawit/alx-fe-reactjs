@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query";
-import Posts from "./PostsComponent";
+import Posts from "./components/PostsComponent";
 
 const queryClient = new QueryClient();
 
