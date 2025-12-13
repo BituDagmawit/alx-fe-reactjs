@@ -1,9 +1,12 @@
-import TodoList from "./TodoList";   // REQUIRED import
+import React from 'react';
+import TodoList from './components/TodoList';
 
-export default function App() {
+function App() {
   return (
-    <div>
-      <TodoList />                  {/* REQUIRED usage */}
+    <div className="App">
+      <TodoList />
     </div>
   );
 }
+
+export default App;
