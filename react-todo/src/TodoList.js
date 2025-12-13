@@ -9,20 +9,13 @@ const TodoList = () => {
   ]);
 
   const addTodo = (text) => {
-    const newTodo = {
-      id: Date.now(),
-      text,
-      completed: false,
-    };
-    setTodos([...todos, newTodo]);
+    setTodos([...todos, { id: Date.now(), text, completed: false }]);
   };
 
   const toggleTodo = (id) => {
     setTodos(
       todos.map((todo) =>
-        todo.id === id
-          ? { ...todo, completed: !todo.completed }
-          : todo
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
       )
     );
   };
@@ -48,15 +41,13 @@ const TodoList = () => {
           >
             {todo.text}
             <button
-                data-testid={`delete-${todo.id}`}
-                onClick={(e) => {
-                    e.stopPropagation();
-                    deleteTodo(todo.id);
-                }}
-                >
-                Delete
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTodo(todo.id);
+              }}
+            >
+              Delete
             </button>
-
           </li>
         ))}
       </ul>
