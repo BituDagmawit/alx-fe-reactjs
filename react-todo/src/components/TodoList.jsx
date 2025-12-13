@@ -16,9 +16,7 @@ setTodos([...todos, { id: Date.now(), text, completed: false }]);
 
 const toggleTodo = (id) => {
 setTodos(
-todos.map(t =>
-t.id === id ? { ...t, completed: !t.completed } : t
-)
+todos.map(t => (t.id === id ? { ...t, completed: !t.completed } : t))
 );
 };
 
@@ -37,7 +35,7 @@ return (
 <li key={todo.id}>
 <span
 onClick={() => toggleTodo(todo.id)}
-style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+style={{ textDecoration: todo.completed ? 'line-through' : 'none', cursor: 'pointer' }}
 >
 {todo.text}
 </span>

@@ -5,7 +5,7 @@ export default function AddTodoForm({ onAdd }) {
 const [text, setText] = useState('');
 
 
-const submit = (e) => {
+const handleSubmit = (e) => {
 e.preventDefault();
 if (!text.trim()) return;
 onAdd(text);
@@ -14,7 +14,7 @@ setText('');
 
 
 return (
-<form onSubmit={submit}>
+<form onSubmit={handleSubmit}>
 <input
 placeholder="Add todo"
 value={text}
