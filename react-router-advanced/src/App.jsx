@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Profile from "./Profile";
+import BlogPost from "./BlogPost";              // REQUIRED
 import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
@@ -9,7 +10,10 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
 
-        {/* PROTECTED ROUTE */}
+        {/* REQUIRED dynamic route */}
+        <Route path="/blog/:id" element={<BlogPost />} />
+
+        {/* REQUIRED protected route */}
         <Route
           path="/profile"
           element={
