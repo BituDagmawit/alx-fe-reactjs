@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddTodoForm from "./AddTodoForm";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([
@@ -8,8 +9,7 @@ const TodoList = () => {
   ]);
 
   const addTodo = (text) => {
-    const newTodo = { id: Date.now(), text, completed: false };
-    setTodos([...todos, newTodo]);
+    setTodos([...todos, { id: Date.now(), text, completed: false }]);
   };
 
   const toggleTodo = (id) => {
@@ -32,14 +32,19 @@ const TodoList = () => {
           <li
             key={todo.id}
             data-testid="todo-item"
-            onClick={() => toggleTodo(todo.id)}
             style={{
               textDecoration: todo.completed ? "line-through" : "none",
               cursor: "pointer",
             }}
+            onClick={() => toggleTodo(todo.id)}
           >
             {todo.text}
-            <button onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                deleteTodo(todo.id);
+              }}
+            >
               Delete
             </button>
           </li>
