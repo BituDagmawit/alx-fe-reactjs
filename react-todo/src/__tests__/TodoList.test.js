@@ -37,7 +37,7 @@ describe("TodoList Component", () => {
     render(<TodoList />);
 
     const todo = screen.getByText("Write Tests");
-    const deleteButton = todo.nextSibling; // assumes Delete button is next to todo text
+    const deleteButton = todo.closest("li").querySelector("button");
 
     fireEvent.click(deleteButton);
 
