@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+>>>>>>> 1bb80d2 (working version with vite)
 import { render, screen, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import TodoList from "../components/TodoList";
@@ -6,6 +9,10 @@ import TodoList from "../components/TodoList";
 describe("TodoList Component", () => {
   test("renders initial todos", () => {
     render(<TodoList />);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1bb80d2 (working version with vite)
     expect(screen.getByText("Learn React")).toBeInTheDocument();
     expect(screen.getByText("Write Tests")).toBeInTheDocument();
     expect(screen.getByText("Build Todo App")).toBeInTheDocument();
@@ -15,13 +22,21 @@ describe("TodoList Component", () => {
     render(<TodoList />);
 
     const input = screen.getByPlaceholderText("Add todo");
+<<<<<<< HEAD
     fireEvent.change(input, { target: { value: "New Todo" } });
 
     fireEvent.click(screen.getByText("Add"));
+=======
+    const button = screen.getByText("Add");
+
+    fireEvent.change(input, { target: { value: "New Todo" } });
+    fireEvent.click(button);
+>>>>>>> 1bb80d2 (working version with vite)
 
     expect(screen.getByText("New Todo")).toBeInTheDocument();
   });
 
+<<<<<<< HEAD
   test("toggles a todo completion", () => {
     render(<TodoList />);
 
@@ -41,3 +56,25 @@ describe("TodoList Component", () => {
     });
 
 });
+=======
+  test("toggles todo completion", () => {
+    render(<TodoList />);
+
+    const todo = screen.getByText("Learn React");
+    fireEvent.click(todo);
+
+    expect(todo).toHaveStyle("text-decoration: line-through");
+  });
+
+  test("deletes a todo", () => {
+    render(<TodoList />);
+
+    const todo = screen.getByText("Write Tests");
+    const deleteButton = todo.nextSibling;
+
+    fireEvent.click(deleteButton);
+
+    expect(todo).not.toBeInTheDocument();
+  });
+});
+>>>>>>> 1bb80d2 (working version with vite)
